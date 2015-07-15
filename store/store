@@ -1,0 +1,119 @@
+st = io.read()
+print("[ This number of piece? ]")
+pi = io.read()
+pi = tonumber(pi)
+----------------------------------------------
+-- 取得するところのfunction 
+----------------------------------------------
+
+function move(high,wide,sum)
+	turtle.forward()
+	if high == 0 then
+		-- 動かない。
+	elseif high < 0 then
+		turtle.down()
+	else
+		turtle.up()
+	end
+
+	if wide < 0 then
+		turtle.turnLeft()
+		for i = 1, math.abs(wide) do
+			turtle.forward()
+		end
+		turtle.turnLeft()
+		turtle.suck(sum)
+		turtle.turnRight()
+		for i = 1, math.abs(wide) do
+			turtle.back()
+		end
+		turtle.turnRight()
+	else
+		turtle.turnRight()
+		for i = 1, wide do
+			turtle.forward()
+		end
+		turtle.turnRight()
+		turtle.suck(sum)
+		turtle.turnLeft()
+		for i = 1, math.abs(wide) do
+			turtle.back()
+		end
+		turtle.turnLeft()
+	end
+	if high == 0 then
+		-- 動かない。
+	elseif high < 0 then
+		turtle.up()
+	else
+		turtle.down()
+	end
+	turtle.back()
+end 
+
+-------------------------------------------
+-- Storage
+-------------------------------------------
+function storage(name,pi)
+	if name == "stone" then
+		move(-1,-3,pi)
+		elseif name == "sand" then
+			move(0,-1,pi)
+		elseif name == "wheat" then
+			move(-1,1,pi)
+		elseif name == "iron" then
+			move(1,1,pi)
+		elseif name == "stick" then
+			move(0,1,pi)
+		elseif name == "coal" then
+			move(-1,0,pi)
+		else
+			workbench(name)
+	end
+end
+
+-------------------------------------------
+-- workbanch
+-------------------------------------------
+function workbench(name)
+	if name == "pan" then
+		storage("wheat",pi*3)
+		turtle.transferTo(2,pi)
+		turtle.transferTo(3,pi)
+		turtle.craft(pi)
+		elseif st == "pick" then
+			storage("stick",pi*2)
+			turtle.transferTo(6,pi)
+			turtle.transferTo(10,pi)
+			storage("iron",pi*3)
+			turtle.transferTo(1,pi)
+			turtle.transferTo(2,pi)
+			turtle.transferTo(3,pi)
+			turtle.craft(pi)
+		elseif st == "scop" then
+			storage("stick",pi*2)
+			turtle.transferTo(6,pi)
+			turtle.transferTo(10,pi)
+			storage("iron",pi)
+			turtle.transferTo(2,pi)
+			turtle.craft(pi)
+			elseif st == "sward" then
+			storage("stick",pi)
+			turtle.transferTo(10,pi)
+			storage("iron",pi*2)
+			turtle.transferTo(2,pi)
+			turtle.transferTo(6,pi)
+			turtle.craft(pi)
+		elseif st == "torch" then
+			pi = math.ceil(pi / 4)
+			storage("stick",pi)
+			turtle.transferTo(5,pi)
+			storage("coal",pi)
+			turtle.craft(pi)
+		else
+			print("error")
+	end
+end
+storage(st,pi)
+turtle.drop()
+os.reboot()
