@@ -7,7 +7,7 @@ Update: 2015/07/15
 ## modules
 __[ computer ]__  
 none  
-[__[ Turtle ]__](../../tree/master/turtle/33 "リンクのタイトル")  
+[__[ Turtle ]__](../../tree/master/turtle/ "Turtle")  
 </turtle/33> [ 33 ] = 3 side 3 talls digging programs  
 (3×3で掘るDigプログラムです 16に松明を置くことによって自動で設置します)
 
