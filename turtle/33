@@ -1,0 +1,91 @@
+
+------------------------------------------------------------------------
+-- 3*3 Digger Program
+------------------------------------------------------------------------
+-- ver 1.2
+-- 
+-- (c) Yukinko_shion 
+-- http://shioneko.sakura.ne.jp/
+-- 
+------------------------------------------------------------------------
+print("Please input the distance number.")
+f = io.read()
+
+
+-- システムの基礎部分
+function dig(tosum,fs)
+	turtle.turnLeft()
+	turtle.dig()
+	if tosum == 2 then
+		torch(fs)
+	end
+	turtle.turnRight()
+	turtle.turnRight()
+	turtle.dig()
+	if tosum == 2 then
+		torch(fs)
+	end
+	turtle.turnLeft()
+end
+
+function digX(forsum)
+	turtle.dig()
+	sand("forward")
+	turtle.forward()
+	dig()
+
+	for i = 1, 2 do
+		turtle.digUp()
+		sand("top")
+		turtle.up()
+		dig(i,forsum)
+	end
+
+		turtle.dig()
+		sand("forward")
+		turtle.forward()
+		dig()
+
+	for i = 1, 2 do
+		turtle.digDown()
+		turtle.down()
+		dig()
+	end
+
+end
+
+-- 砂利
+function sand(select)
+	sleep(0.2)
+	if select == "forward" then
+		while turtle.detect() == true do
+			turtle.dig()
+			sleep(1)
+			if turtle.detect() == false then
+				break
+			end
+		end
+	elseif select == "top" then
+		while turtle.detectUp() == true do
+			turtle.digUp()
+			sleep(1)
+			if turtle.detectUp() == false then
+				break
+			end
+		end
+	end
+end
+
+-- torch
+function torch(ls)
+	-- 奇数の場合だけ松明置く
+	if not(ls % 2 == 0) then 
+		turtle.select(16)
+		turtle.place()
+		turtle.select(1)
+	end
+end
+
+for i = 1, f do
+	digX(i)
+end
