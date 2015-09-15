@@ -8,6 +8,10 @@
 -- http://shioneko.sakura.ne.jp/
 -- 
 ------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+-- text
+------------------------------------------------------------------------
 local tNums = { ... }
 local pNums = {"Height ","Width ","Distence "}
 
@@ -33,3 +37,109 @@ else
 		print("Finish")
 	end
 end
+
+------------------------------------------------------------------------
+-- 内部システム
+------------------------------------------------------------------------
+
+function BandF(bf)
+	for i = 1,bf do
+		turtle.dig()
+		turtle.forward()
+	end
+	for i = 1,bf do
+		turtle.back()
+	end
+end
+
+function wDig(sum)
+	turtle.turnLeft()
+	BandF(sum)
+	turtle.turnRight()
+	turtle.turnRight()
+	BandF(sum)
+	turtle.turnLeft()
+end
+
+function fWidth()
+	if tNums[2] == "1" then
+		
+	elseif not(tNums[2] % 2 == 0) then
+		--奇数
+		local w_Nums = math.floor(tNums[2] / 2)
+		wDig(w_Nums)
+	else
+		--偶数
+		local w_Nums = tNums[2] / 2
+		wDig(w_Nums)
+	end
+end
+
+function fHeight(UandD)
+	if tNums[1] == "1" then
+		fWidth()
+	else
+		if UandD ~= "finish" then
+			fWidth()
+		end
+		if UandD == "up" then
+			for i = 1,tNums[1]-1 do
+				turtle.digUp()
+				turtle.up()
+				fWidth()
+			end
+		elseif UandD == "Down" then
+			for i = 1,tNums[1]-1 do
+				turtle.digDown()
+				turtle.down()
+				fWidth()
+			end
+		else
+			for i = 1,tNums[1]-1 do
+				turtle.down()
+			end
+		end
+	end
+end
+
+function fDistence()
+	if tNums[3] == "1" then
+		fHeight("up")
+		fHeight("finish")
+
+	elseif (tNums[3] % 2 == 0) then
+		-- 偶数
+		local d_Nums = tNums[3] / 2
+		for i = 1,d_Nums do
+			fHeight("up")
+			turtle.dig()
+			turtle.forward()
+			fHeight("Down")
+			if i ~= d_Nums then
+				turtle.dig()
+				turtle.forward()
+			end
+		end
+	elseif not(tNums[3] % 2 == 0) then
+		local d_Nums = math.ceil(tNums[2] / 2)
+		for i = 1,d_Nums do
+			fHeight("up")
+			if i == d_Nums then
+				fHeight("finish")
+			else
+				turtle.dig()
+				turtle.forward()
+				fHeight("Down")
+				if i ~= d_Nums then
+					turtle.dig()
+					turtle.forward()
+				end
+			end
+		end
+	end
+end
+
+------------------------------------------------------------------------
+-- system
+------------------------------------------------------------------------
+fDistence()
