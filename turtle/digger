@@ -2,53 +2,39 @@
 ------------------------------------------------------------------------
 -- digger programs
 ------------------------------------------------------------------------
--- ver 1.0
+-- ver 1.2
 -- 
 -- (c) Yukinko_shion 
 -- http://shioneko.sakura.ne.jp/
 -- 
 ------------------------------------------------------------------------
-
-------------------------------------------------------------------------
--- text
-------------------------------------------------------------------------
 local tNums = { ... }
 local pNums = {"Height ","Width ","Distence "}
 
-print("---------------------------------------")
-if #tNums == 0 then
-	print("Usage :")
-	print("digger [Height] [Width] [Distance]")
-	print("Example : digger 3 4 5")
-else
-	for i = 1, #tNums do
-		io.write(pNums[i])
-		print(tNums[i])
-	end
+------------------------------------------------------------------------
+-- Block Systems
+------------------------------------------------------------------------
+function sand()
 end
-print("---------------------------------------")
-if #tNums == 0 then
-else
-	print("input to the distance number. OK? ")
-	check = io.read()
-	if check == "ok" then
-		print("Moveing!!")
-	else
-		print("Finish")
-	end
-end
-
 ------------------------------------------------------------------------
 -- 内部システム
 ------------------------------------------------------------------------
 
 function BandF(bf)
 	for i = 1,bf do
-		turtle.dig()
-		turtle.forward()
+		if i == bf then
+			turtle.dig()
+		else
+			turtle.dig()
+			turtle.forward()
+		end
 	end
 	for i = 1,bf do
-		turtle.back()
+		if i == bf then
+			break
+		else
+			turtle.back()
+		end
 	end
 end
 
@@ -138,8 +124,37 @@ function fDistence()
 		end
 	end
 end
+------------------------------------------------------------------------
+-- text
+------------------------------------------------------------------------
+
+
+
+print("---------------------------------------")
+if #tNums == 0 then
+	print("Usage :")
+	print("digger [Height] [Width] [Distance]")
+	print("Example : digger 3 4 5")
+else
+	for i = 1, #tNums do
+		io.write(pNums[i])
+		print(tNums[i])
+	end
+end
+print("---------------------------------------")
+if #tNums == 0 then
+else
+	print("input to the distance number. OK? ")
+	check = io.read()
+	if check == "ok" then
+		fDistence()
+		print("Moveing!!")
+	else
+		print("Finish")
+	end
+end
 
 ------------------------------------------------------------------------
 -- system
 ------------------------------------------------------------------------
-fDistence()
+
