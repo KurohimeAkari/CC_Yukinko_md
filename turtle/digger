@@ -1,0 +1,35 @@
+
+------------------------------------------------------------------------
+-- digger programs
+------------------------------------------------------------------------
+-- ver 1.0
+-- 
+-- (c) Yukinko_shion 
+-- http://shioneko.sakura.ne.jp/
+-- 
+------------------------------------------------------------------------
+local tNums = { ... }
+local pNums = {"Height ","Width ","Distence "}
+
+print("---------------------------------------")
+if #tNums == 0 then
+	print("Usage :")
+	print("digger [Height] [Width] [Distance]")
+	print("Example : digger 3 4 5")
+else
+	for i = 1, #tNums do
+		io.write(pNums[i])
+		print(tNums[i])
+	end
+end
+print("---------------------------------------")
+if #tNums == 0 then
+else
+	print("input to the distance number. OK? ")
+	check = io.read()
+	if check == "ok" then
+		print("Moveing!!")
+	else
+		print("Finish")
+	end
+end
