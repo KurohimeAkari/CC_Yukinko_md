@@ -1,8 +1,8 @@
 # Conputer Craft Yukinko modules
 __[ Download ]__ <https://github.com/KurohimeAkari/CC_Yukinko_md/raw/master/CC_library.zip>
 #### Version update
-Version: 1.1
-Update: 2015/07/15
+Version: 2.0
+Update: 2015/09/16
 
 ## modules
 __[ computer ]__  
