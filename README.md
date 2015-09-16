@@ -10,7 +10,7 @@ none
 [__[ Turtle ]__](../../tree/master/turtle/ "Turtle")  
 </turtle/33> [ 33 ] = 3 side 3 talls digging programs  
 (3×3で掘るDigプログラムです 16に松明を置くことによって自動で設置します)  
-[ digger ] = digger [height] [width] [distance]  
+[ digger ] = digger [height] [width] [distance].  
 (自分で縦横奥行きを設定して動かせる削り機です)
 
 ## Installs
