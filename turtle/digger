@@ -14,7 +14,21 @@ local pNums = {"Height ","Width ","Distence "}
 ------------------------------------------------------------------------
 -- Block Systems
 ------------------------------------------------------------------------
-function sand()
+function sand(time)
+	if time == nil then
+		local time = 0 
+	end
+	sleep(time)
+	print(time)
+	local status,value = turtle.inspect()
+	while value.name == "minecraft:gravel" or value.name == "minecraft:sand" do
+		turtle.dig()
+		status,value = turtle.inspect()
+		if status == false then
+			sleep(time)
+			break
+		end
+	end
 end
 ------------------------------------------------------------------------
 -- 内部システム
@@ -22,6 +36,7 @@ end
 
 function BandF(bf)
 	for i = 1,bf do
+		sand(0.2)
 		if i == bf then
 			turtle.dig()
 		else
@@ -65,6 +80,7 @@ function fHeight(UandD)
 	if tNums[1] == "1" then
 		fWidth()
 	else
+		sand()
 		if UandD ~= "finish" then
 			fWidth()
 		end
@@ -102,11 +118,13 @@ function fDistence()
 			turtle.forward()
 			fHeight("Down")
 			if i ~= d_Nums then
+				sand(0.5)
 				turtle.dig()
 				turtle.forward()
 			end
 		end
 	elseif not(tNums[3] % 2 == 0) then
+		--　奇数
 		local d_Nums = math.ceil(tNums[2] / 2)
 		for i = 1,d_Nums do
 			fHeight("up")
@@ -117,6 +135,7 @@ function fDistence()
 				turtle.forward()
 				fHeight("Down")
 				if i ~= d_Nums then
+					sand(0.5)
 					turtle.dig()
 					turtle.forward()
 				end
