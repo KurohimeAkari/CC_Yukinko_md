@@ -1,0 +1,21 @@
+local check_l = peripheral.isPresent( "left" )
+local check_r = peripheral.isPresent( "right" )
+
+
+if check_l == true or check_r == true then
+	local pos = peripheral.getNames()
+	for i = 1,#pos do
+		local ch = peripheral.wrap(pos[i])
+		--print(pos[i])
+		if peripheral.getType(pos[i]) == "ChunkAwaker" then
+			if ch.isActivated() == true then
+				ch.setLevel(0)
+				ch.activate(true)
+				local x,y = term.getCursorPos()
+				term.setCursorPos(26,1)
+				term.write("chank mode :1")
+				term.setCursorPos(x,y)
+			end
+		end
+	end
+end
