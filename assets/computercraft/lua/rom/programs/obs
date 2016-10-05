@@ -1,0 +1,27 @@
+
+------------------------------------------------------------------------
+-- 3*3 Digger Program
+------------------------------------------------------------------------
+-- ver 1.2
+-- 
+-- (c) Yukinko_shion 
+-- http://shioneko.sakura.ne.jp/
+-- 
+------------------------------------------------------------------------
+Dire = "left"
+
+while turtle.detectDown() == true do
+	turtle.digDown()
+	turtle.forward()
+	if turtle.detect() == true and Dire == "left" then
+		turtle.turnRight()
+		turtle.forward()
+		turtle.turnRight()
+		Dire = "right"
+	elseif turtle.detect() == true and Dire == "right" then
+		turtle.turnLeft()
+		turtle.forward()
+		turtle.turnLeft()
+		Dire = "left"
+	end
+end

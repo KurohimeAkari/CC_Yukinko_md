@@ -11,6 +11,13 @@
 print("Please input the distance number.")
 f = io.read()
 
+-- 奇数処理
+if not (f % 2 == 0) then
+	f = floor(f / 2)
+	flim = "true"
+else
+	f = f / 2
+end
 
 -- システムの基礎部分
 function dig(tosum,fs)
@@ -40,16 +47,17 @@ function digX(forsum)
 		turtle.up()
 		dig(i,forsum)
 	end
+	if not flim == "true" and i == f then
+			turtle.dig()
+			sand("forward")
+			turtle.forward()
+			dig()
 
-		turtle.dig()
-		sand("forward")
-		turtle.forward()
-		dig()
-
-	for i = 1, 2 do
-		turtle.digDown()
-		turtle.down()
-		dig()
+		for i = 1, 2 do
+			turtle.digDown()
+			turtle.down()
+			dig()
+		end
 	end
 
 end

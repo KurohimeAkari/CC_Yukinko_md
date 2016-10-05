@@ -19,7 +19,7 @@ function sand(time)
 		local time = 0 
 	end
 	sleep(time)
-	print(time)
+	--print(time)
 	local status,value = turtle.inspect()
 	while value.name == "minecraft:gravel" or value.name == "minecraft:sand" do
 		turtle.dig()

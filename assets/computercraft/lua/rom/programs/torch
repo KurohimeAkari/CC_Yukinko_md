@@ -1,0 +1,33 @@
+function torch()
+	local value = turtle.getItemDetail()
+	if value.name == "minecraft:torch" then
+		turtle.place()
+	else
+		
+	end
+end
+
+------------------------------------------------------------------------
+-- formats up
+------------------------------------------------------------------------
+while turtle.detectUp() == false do
+	turtle.up() 
+	if turtle.detectUp() == true then
+		break
+	end
+end
+------------------------------------------------------------------------
+-- digger programs
+------------------------------------------------------------------------
+while turtle.detect() == false do
+	turtle.turnLeft()
+	torch()
+	turtle.turnRight()
+	turtle.turnRight()
+	torch()
+	turtle.turnLeft()
+	for i = 1, 4 do
+		turtle.forward()
+	end
+end
+
