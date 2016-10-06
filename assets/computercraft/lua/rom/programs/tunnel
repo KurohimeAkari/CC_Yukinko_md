@@ -1,0 +1,107 @@
+------------------------------------------------------------------------
+-- 素材を置く部分 puts(itemname , Meta)
+------------------------------------------------------------------------
+function puts(name,damage,dire)
+	for i = 1, 16 do
+		local value = turtle.getItemDetail()
+		-- スロットに存在してるか
+		if value then
+			-- 名前が一致してたならば純粋に設置
+			if value.name == name and damage == nil and value.damage == 0 then
+				if dire == nil then
+					turtle.dig()
+					turtle.place()
+				elseif dire == 'top' then
+					turtle.digUp()
+					turtle.placeUp()
+				end
+				break
+			-- 種類のある部品ならば入力数値で設置する。
+			elseif value.name == name and value.damage == damage then
+				if dire == nil then
+					turtle.dig()
+					turtle.place()
+				elseif dire == 'top' then
+					turtle.digUp()
+					turtle.placeUp()
+				end
+				break
+			end
+		end
+		turtle.select(i)
+		if i == 16 then
+			print(name .. ' error')
+			os.pullEvent("turtle_inventory")
+			puts(name,damage)
+		end
+	end
+end
+
+--puts('minecraft:planks')
+--puts('minecraft:planks',1)
+
+--天井
+function ceiling(T) 
+	if T == 4 then
+		puts('minecraft:planks',nil,'top')
+	else 
+		turtle.digUp()
+	end
+end
+
+------------------------------------------------------------------------
+-- 壁部分 (name,Meta,削り取る横幅,天井まで)
+------------------------------------------------------------------------
+function Kabe (Name,Meta,Long,T)
+	turtle.turnLeft()
+		for w = 1,Long do
+			turtle.dig()
+			turtle.forward()
+			ceiling(T)
+		end
+		puts(Name,Meta)
+		for w = 1,Long do
+			turtle.back()
+		end
+	turtle.turnRight()
+	ceiling(T)
+	turtle.turnRight()
+		for w = 1,Long do
+			turtle.dig()
+			turtle.forward()
+			ceiling(T)
+		end
+		puts(Name,Meta)
+		for w = 1,Long do
+			turtle.back()
+		end
+	turtle.turnLeft()
+end
+
+------------------------------------------------------------------------
+-- 高さ
+------------------------------------------------------------------------
+function Toll(Name,Meta,Tolls)
+	for t = 1,Tolls do
+		Kabe(Name,Meta,2,t)
+		turtle.up()
+	end
+	for t = 1,Tolls do
+		turtle.down()
+	end
+end
+
+------------------------------------------------------------------------
+-- 前の制作まで 途中にライトが含まれてるものはまだ未完成。
+------------------------------------------------------------------------
+
+Toll('minecraft:planks',1,4)
+for d = 1,5 do
+	turtle.dig()
+	turtle.forward()
+	Toll('minecraft:cobblestone',nil,4)
+end
+turtle.dig()
+turtle.forward()
+
+	
