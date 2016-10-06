@@ -1,2 +1,16 @@
-local value = turtle.getItemDetail()
-print(value.name)
+function names(slot,damage,count)
+	local value = turtle.getItemDetail(slot)
+	if slot <= 16 then
+		if value then
+			print(value.name)
+			if damage == true then
+				print(value.damage)
+			end
+			if count == true then
+				print(value.count)
+			end
+		end
+	end
+end
+
+names(1,true,true)
