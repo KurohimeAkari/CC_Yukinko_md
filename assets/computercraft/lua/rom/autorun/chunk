@@ -15,11 +15,15 @@ if check_l == true or check_r == true then
 		local ch = peripheral.wrap(pos[i])
 		--print(pos[i])
 		if peripheral.getType(pos[i]) == "modem" then
+			
 			text(28,1,"GPS mode")
-			local gx,gy,gz = gps.locate()
-			local Tpoint = " x:".. gx .. " y:" .. gy .. " z:" .. gz
-			text(22,2,Tpoint)
-			term.setCursorPos(1,3)
+			if not gps.locate() == nil then
+				local gx,gy,gz = gps.locate()
+				local Tpoint = " x:".. gx .. " y:" .. gy .. " z:" .. gz
+				text(22,2,Tpoint)
+			end
+				term.setCursorPos(1,3)
+			
 		elseif peripheral.getType(pos[i]) == "ChunkAwaker" then
 			if ch.isActivated() == true then
 				ch.setLevel(0)
